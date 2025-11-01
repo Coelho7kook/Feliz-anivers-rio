@@ -7,7 +7,7 @@ git remote add origin https://github.com/Coelho7kook/Feliz-anivers-rio.git
 git push -u origin main
 
 
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -434,38 +434,9 @@ git push -u origin main
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(41, 80, 150, 0.4) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(150, 41, 120, 0.4) 0%, transparent 40%),
-                #0a0a2a;
+            background: url('cloud_tifa_background.jpg') no-repeat center center;
+            background-size: cover;
             z-index: -1;
-        }
-
-        .characters-container {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 70%;
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            padding: 0 50px;
-        }
-
-        .characters-together {
-            width: 400px;
-            height: 300px;
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-        }
-
-        .characters-image {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            border-radius: 10px;
-            box-shadow: 0 0 30px rgba(100, 150, 255, 0.5);
         }
 
         .dialogue-box {
@@ -473,7 +444,7 @@ git push -u origin main
             bottom: 20px;
             left: 20px;
             right: 20px;
-            background: rgba(20, 20, 40, 0.9);
+            background: rgba(20, 20, 40, 0.85);
             border: 3px solid #6d98d4;
             border-radius: 10px;
             padding: 20px;
@@ -495,7 +466,7 @@ git push -u origin main
             transform: rotate(45deg);
             border-left: 3px solid #6d98d4;
             border-top: 3px solid #6d98d4;
-            background: rgba(20, 20, 40, 0.9);
+            background: rgba(20, 20, 40, 0.85);
         }
 
         .speaker-name {
@@ -538,6 +509,41 @@ git push -u origin main
             opacity: 0;
         }
 
+        .orientation-message {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 22, 0.95);
+            z-index: 100;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .orientation-message h2 {
+            color: #a3d9ff;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .orientation-message p {
+            color: #cccccc;
+            font-size: 1.2rem;
+            max-width: 500px;
+            line-height: 1.6;
+        }
+
+        .rotate-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: rotate 2s infinite;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -576,7 +582,7 @@ git push -u origin main
 
         @keyframes rotate {
             0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            100% { transform: rotate(90deg); }
         }
 
         @keyframes shimmer {
@@ -599,13 +605,46 @@ git push -u origin main
             .message { font-size: 1.2rem; }
             .message-container { padding: 25px; }
             .btn-container { flex-direction: column; gap: 10px; }
-            .characters-container { padding: 0 20px; }
-            .characters-together { width: 300px; height: 200px; }
+            
+            /* Mostrar mensagem de orientação em dispositivos móveis no modo retrato */
+            @media (max-height: 600px) and (orientation: portrait) {
+                .orientation-message {
+                    display: flex;
+                }
+            }
+        }
+
+        /* Estilo para modo paisagem em dispositivos móveis */
+        @media (orientation: landscape) and (max-height: 500px) {
+            .dialogue-screen {
+                height: 100vh;
+                max-width: 100%;
+                border-radius: 0;
+            }
+            
+            .dialogue-box {
+                bottom: 10px;
+                left: 10px;
+                right: 10px;
+                min-height: 120px;
+            }
+            
+            .dialogue-message {
+                font-size: 1.1rem;
+                min-height: 60px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="universe" id="universe"></div>
+    
+    <!-- Mensagem para orientar a virar o celular -->
+    <div class="orientation-message" id="orientation-message">
+        <div class="rotate-icon">📱</div>
+        <h2>Melhor experiência em modo paisagem</h2>
+        <p>Vire seu celular de lado para aproveitar melhor esta parte especial!</p>
+    </div>
     
     <div class="container">
         <!-- Tela de Boas-Vindas -->
@@ -657,12 +696,6 @@ git push -u origin main
         <!-- Tela de Diálogo dos Personagens -->
         <div class="dialogue-screen" id="dialogue-screen">
             <div class="dialogue-bg"></div>
-            
-            <div class="characters-container">
-                <div class="characters-together">
-                    <img src="cloud_tifa_together.png" alt="Cloud e Tifa" class="characters-image">
-                </div>
-            </div>
             
             <div class="dialogue-box" id="dialogue-box">
                 <div class="speaker-name" id="speaker-name">Cloud</div>
@@ -786,6 +819,7 @@ git push -u origin main
         const nextMusicBtn = document.getElementById('next-music-btn');
         const startBtn = document.getElementById('start-btn');
         const violaoToggle = document.getElementById('violao-toggle');
+        const orientationMessage = document.getElementById('orientation-message');
 
         // Elementos de diálogo
         const speakerName = document.getElementById('speaker-name');
@@ -818,6 +852,19 @@ git push -u origin main
                 star.style.animationDelay = `${Math.random() * 5}s`;
                 
                 universeContainer.appendChild(star);
+            }
+        }
+
+        // Verificar orientação da tela
+        function checkOrientation() {
+            if (window.innerHeight < window.innerWidth) {
+                // Modo paisagem
+                orientationMessage.style.display = 'none';
+            } else {
+                // Modo retrato - mostrar mensagem apenas na tela de diálogo
+                if (dialogueScreen.style.display === 'block') {
+                    orientationMessage.style.display = 'flex';
+                }
             }
         }
 
@@ -963,6 +1010,9 @@ git push -u origin main
                 dialogueScreen.style.display = 'block';
                 setTimeout(() => {
                     dialogueScreen.style.opacity = '1';
+                    
+                    // Verificar orientação
+                    checkOrientation();
                     
                     // Trocar música
                     backgroundMusic.src = specialMusic;
@@ -1185,6 +1235,10 @@ git push -u origin main
             nextBtn.addEventListener('click', nextPage);
             specialBtn.addEventListener('click', startDialogues);
             startBtn.addEventListener('click', startExperience);
+            
+            // Verificar orientação quando a janela é redimensionada ou girada
+            window.addEventListener('resize', checkOrientation);
+            window.addEventListener('orientationchange', checkOrientation);
         }
 
         // Permitir reprodução de música após interação do usuário
@@ -1199,4 +1253,4 @@ git push -u origin main
         window.onload = init;
     </script>
 </body>
-</html>
+</html>                                  
