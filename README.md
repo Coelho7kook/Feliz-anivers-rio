@@ -606,7 +606,7 @@ git push -u origin main
             .message-container { padding: 25px; }
             .btn-container { flex-direction: column; gap: 10px; }
             
-            /* Mostrar mensagem de orientação em dispositivos móveis no modo retrato */
+            
             @media (max-height: 600px) and (orientation: portrait) {
                 .orientation-message {
                     display: flex;
@@ -614,7 +614,7 @@ git push -u origin main
             }
         }
 
-        /* Estilo para modo paisagem em dispositivos móveis */
+        
         @media (orientation: landscape) and (max-height: 500px) {
             .dialogue-screen {
                 height: 100vh;
@@ -639,7 +639,7 @@ git push -u origin main
 <body>
     <div class="universe" id="universe"></div>
     
-    <!-- Mensagem para orientar a virar o celular -->
+    
     <div class="orientation-message" id="orientation-message">
         <div class="rotate-icon">📱</div>
         <h2>Melhor experiência em modo paisagem</h2>
@@ -653,7 +653,7 @@ git push -u origin main
             <div class="subtitle">Um presente especial feito com carinho</div>
             
             <div class="warning">
-                <strong>Aviso:</strong> Algumas músicas eu toquei no violão. Uma corda soltou durante a gravação, então algumas partes podem soar diferentes. Fiz o meu melhor!
+                <strong>Aviso:</strong> Algumas músicas eu toquei no violão. Uma corda soltou durante a gravação, então algumas partes podem soar ruim. Fiz o meu melhor!
             </div>
             
             <p style="margin-bottom: 20px; max-width: 500px; font-size: 1.1rem;">
@@ -663,7 +663,7 @@ git push -u origin main
             <button class="start-btn" id="start-btn">Iniciar Experiência</button>
         </div>
         
-        <!-- Conteúdo Principal (inicialmente oculto) -->
+        
         <div class="content-screen" id="content-screen">
             <div class="message-container">
                 <div class="message" id="message"></div>
@@ -693,7 +693,7 @@ git push -u origin main
             <div class="page-indicator" id="page-indicator"></div>
         </div>
 
-        <!-- Tela de Diálogo dos Personagens -->
+        
         <div class="dialogue-screen" id="dialogue-screen">
             <div class="dialogue-bg"></div>
             
@@ -750,7 +750,7 @@ git push -u origin main
             { speaker: "Cloud", message: "(pensando)\n\nEla não faz ideia do quanto significa para mim.\nComo é reconfortante apenas estar ao seu lado.\n\nSe eu pudesse, diria tudo...\nMas talvez alguns sentimentos sejam melhores guardados no coração." }
         ];
 
-        // Músicas para cada página - versão original e violão
+        
         const musicFilesOriginal = [
             "musicaX1.mp3",  // Tifa's Theme (FF7 Remake) - original
             "musicaX2.mp3",  // Main Theme Sector 7 Undercity (FF7 Remake) - original
@@ -769,10 +769,10 @@ git push -u origin main
             "musica6.mp3"    // Música???? - violão
         ];
 
-        // Música especial para os diálogos
+        
         const specialMusic = "musica7.mp3";
 
-        // Títulos das músicas para exibição
+        
         const musicTitles = [
             "Tifa's Theme - Final Fantasy VII",
             "Main Theme Sector 7 - Final Fantasy VII",
@@ -782,7 +782,7 @@ git push -u origin main
             "Música????"
         ];
 
-        // Configurações de digitação
+    
         let currentPage = 0;
         let currentChar = 0;
         let isDeleting = false;
@@ -794,14 +794,14 @@ git push -u origin main
         let isViolaoVersion = true;
         let hasSwitchedText = false;
 
-        // Para os diálogos
+      
         let currentDialogue = 0;
         let dialogueChar = 0;
         let isDialogueDeleting = false;
         let isDialogueWaiting = false;
         let dialogueTimeoutId = null;
 
-        // Elementos DOM
+        
         const welcomeScreen = document.getElementById('welcome-screen');
         const contentScreen = document.getElementById('content-screen');
         const dialogueScreen = document.getElementById('dialogue-screen');
@@ -821,14 +821,14 @@ git push -u origin main
         const violaoToggle = document.getElementById('violao-toggle');
         const orientationMessage = document.getElementById('orientation-message');
 
-        // Elementos de diálogo
+        
         const speakerName = document.getElementById('speaker-name');
         const dialogueMessage = document.getElementById('dialogue-message');
         const dialogueCursor = document.getElementById('dialogue-cursor');
         const dialogueNext = document.getElementById('dialogue-next');
         const dialogueBox = document.getElementById('dialogue-box');
 
-        // Criar universo estelar
+      
         function createUniverse() {
             const starsCount = 400;
             
@@ -836,16 +836,16 @@ git push -u origin main
                 const star = document.createElement('div');
                 star.classList.add('star');
                 
-                // Tamanho aleatório
+                
                 const size = Math.random() * 3;
                 star.style.width = `${size}px`;
                 star.style.height = `${size}px`;
                 
-                // Posição aleatória
+                
                 star.style.left = `${Math.random() * 100}%`;
                 star.style.top = `${Math.random() * 100}%`;
                 
-                // Brilho e duração aleatórios
+                
                 const brightness = 0.3 + Math.random() * 0.7;
                 star.style.opacity = brightness;
                 star.style.animationDuration = `${2 + Math.random() * 4}s`;
@@ -855,20 +855,20 @@ git push -u origin main
             }
         }
 
-        // Verificar orientação da tela
+        
         function checkOrientation() {
             if (window.innerHeight < window.innerWidth) {
-                // Modo paisagem
+              
                 orientationMessage.style.display = 'none';
             } else {
-                // Modo retrato - mostrar mensagem apenas na tela de diálogo
+                
                 if (dialogueScreen.style.display === 'block') {
                     orientationMessage.style.display = 'flex';
                 }
             }
         }
 
-        // Inicializar indicadores de página
+        
         function initPageIndicators() {
             pageIndicator.innerHTML = '';
             for (let i = 0; i < messages.length; i++) {
@@ -898,7 +898,7 @@ git push -u origin main
             }
         }
 
-        // Atualizar indicadores de página
+        
         function updatePageIndicators() {
             const dots = document.querySelectorAll('.dot');
             dots.forEach((dot, index) => {
@@ -910,24 +910,24 @@ git push -u origin main
             });
         }
 
-        // Efeito de digitação com mudanças reais de texto
+        
         function typeText() {
             if (timeoutId) clearTimeout(timeoutId);
             
             let currentText = hasSwitchedText ? alternativeMessages[currentPage] : messages[currentPage];
             
             if (!isDeleting && currentChar <= currentText.length) {
-                // Digitação normal
+              
                 messageElement.textContent = currentText.substring(0, currentChar);
                 currentChar++;
                 
-                // Simular hesitação ocasional
+                
                 if (Math.random() < 0.02 && currentChar > 10) {
                     timeoutId = setTimeout(typeText, typingSpeed * 5);
                     return;
                 }
                 
-                // Simular mudança de ideia (apagar e reescrever) - mais frequente
+                
                 if (Math.random() < 0.03 && currentChar > 30 && !hasSwitchedText) {
                     isDeleting = true;
                     timeoutId = setTimeout(typeText, pauseTime);
@@ -937,16 +937,16 @@ git push -u origin main
                 timeoutId = setTimeout(typeText, typingSpeed);
                 
             } else if (isDeleting && currentChar > 0) {
-                // Apagando texto
+                
                 messageElement.textContent = currentText.substring(0, currentChar - 1);
                 currentChar--;
                 
-                // Parar de apagar quando chegar ao início e trocar para texto alternativo
+                
                 if (currentChar === 0) {
                     isDeleting = false;
                     hasSwitchedText = true;
                     
-                    // Pequena pausa antes de começar a digitar o texto alternativo
+                    
                     timeoutId = setTimeout(typeText, 1000);
                     return;
                 }
@@ -954,25 +954,25 @@ git push -u origin main
                 timeoutId = setTimeout(typeText, deleteSpeed);
                 
             } else {
-                // Texto completo
+              
                 isWaiting = true;
                 cursorElement.style.display = 'none';
                 nextBtn.style.opacity = '1';
                 nextBtn.style.pointerEvents = 'auto';
                 
-                // Mostrar botão especial na última página
+                
                 if (currentPage === messages.length - 1) {
                     specialBtn.style.opacity = '1';
                     specialBtn.style.pointerEvents = 'auto';
                 }
             }
             
-            // Atualizar barra de progresso
+            
             const progress = (currentChar / currentText.length) * 100;
             progressBar.style.width = `${progress}%`;
         }
 
-        // Avançar para a próxima página
+        
         function nextPage() {
             if (currentPage < messages.length - 1) {
                 currentPage++;
@@ -981,7 +981,7 @@ git push -u origin main
                 isWaiting = false;
                 hasSwitchedText = false;
                 
-                // Resetar elementos
+                
                 messageElement.textContent = '';
                 cursorElement.style.display = 'inline-block';
                 nextBtn.style.opacity = '0';
@@ -990,20 +990,20 @@ git push -u origin main
                 specialBtn.style.pointerEvents = 'none';
                 progressBar.style.width = '0%';
                 
-                // Atualizar música
+                
                 updateMusic();
                 
-                // Atualizar indicadores
+                
                 updatePageIndicators();
                 
-                // Iniciar digitação
+                
                 typeText();
             }
         }
 
-        // Iniciar diálogos
+        
         function startDialogues() {
-            // Esconder conteúdo principal e mostrar tela de diálogo
+            
             contentScreen.style.opacity = '0';
             setTimeout(() => {
                 contentScreen.style.display = 'none';
@@ -1011,49 +1011,49 @@ git push -u origin main
                 setTimeout(() => {
                     dialogueScreen.style.opacity = '1';
                     
-                    // Verificar orientação
+                    
                     checkOrientation();
                     
-                    // Trocar música
+                
                     backgroundMusic.src = specialMusic;
                     backgroundMusic.play();
                     musicInfo.textContent = "Tocando: Diálogo Especial";
                     
-                    // Iniciar primeiro diálogo
+                
                     startDialogue();
                 }, 300);
             }, 500);
         }
 
-        // Sistema de digitação para diálogos
+        
         function startDialogue() {
             if (dialogueTimeoutId) clearTimeout(dialogueTimeoutId);
             
             const currentDialogueData = dialogues[currentDialogue];
             
             if (!isDialogueDeleting && dialogueChar <= currentDialogueData.message.length) {
-                // Atualizar nome do speaker
+                
                 speakerName.textContent = currentDialogueData.speaker;
                 
-                // Digitação normal
+                
                 dialogueMessage.textContent = currentDialogueData.message.substring(0, dialogueChar);
                 dialogueChar++;
                 
                 dialogueTimeoutId = setTimeout(startDialogue, typingSpeed);
                 
             } else {
-                // Diálogo completo
+                
                 isDialogueWaiting = true;
                 dialogueCursor.style.display = 'none';
                 dialogueNext.style.opacity = '1';
                 
-                // Habilitar clique para próximo diálogo
+                
                 dialogueBox.style.cursor = 'pointer';
                 dialogueBox.onclick = nextDialogue;
             }
         }
 
-        // Próximo diálogo
+        
         function nextDialogue() {
             if (currentDialogue < dialogues.length - 1) {
                 currentDialogue++;
@@ -1061,17 +1061,17 @@ git push -u origin main
                 isDialogueDeleting = false;
                 isDialogueWaiting = false;
                 
-                // Resetar elementos
+                
                 dialogueMessage.textContent = '';
                 dialogueCursor.style.display = 'inline-block';
                 dialogueNext.style.opacity = '0';
                 dialogueBox.style.cursor = 'default';
                 dialogueBox.onclick = null;
                 
-                // Iniciar próximo diálogo
+                
                 startDialogue();
             } else {
-                // Fim dos diálogos - voltar para o início
+                
                 currentDialogue = 0;
                 dialogueChar = 0;
                 isDialogueDeleting = false;
@@ -1083,7 +1083,7 @@ git push -u origin main
                 dialogueBox.style.cursor = 'default';
                 dialogueBox.onclick = null;
                 
-                // Voltar para o conteúdo principal
+                
                 dialogueScreen.style.opacity = '0';
                 setTimeout(() => {
                     dialogueScreen.style.display = 'none';
@@ -1091,10 +1091,10 @@ git push -u origin main
                     setTimeout(() => {
                         contentScreen.style.opacity = '1';
                         
-                        // Restaurar música original
+                        
                         updateMusic();
                         
-                        // Reiniciar do início
+                        
                         currentPage = 0;
                         currentChar = 0;
                         isDeleting = false;
@@ -1116,7 +1116,7 @@ git push -u origin main
             }
         }
 
-        // Atualizar música baseada na versão selecionada
+        
         function updateMusic() {
             const musicFiles = isViolaoVersion ? musicFilesViolao : musicFilesOriginal;
             backgroundMusic.src = musicFiles[currentPage];
@@ -1126,7 +1126,7 @@ git push -u origin main
             musicInfo.textContent = `Tocando: ${musicTitles[currentPage]}${versionText}`;
         }
 
-        // Configurar controles
+        
         function setupControls() {
             // Botão de play/pause
             playPauseBtn.addEventListener('click', () => {
@@ -1139,7 +1139,7 @@ git push -u origin main
                 }
             });
             
-            // Botão de próxima música
+            
             nextMusicBtn.addEventListener('click', () => {
                 if (currentPage < musicFilesOriginal.length - 1) {
                     currentPage++;
@@ -1155,7 +1155,7 @@ git push -u origin main
                 updateMusic();
                 updatePageIndicators();
                 
-                // Reiniciar texto
+                
                 messageElement.textContent = '';
                 cursorElement.style.display = 'inline-block';
                 nextBtn.style.opacity = '0';
@@ -1166,7 +1166,7 @@ git push -u origin main
                 typeText();
             });
             
-            // Botão de música anterior
+            
             prevBtn.addEventListener('click', () => {
                 if (currentPage > 0) {
                     currentPage--;
@@ -1182,7 +1182,7 @@ git push -u origin main
                 updateMusic();
                 updatePageIndicators();
                 
-                // Reiniciar texto
+                
                 messageElement.textContent = '';
                 cursorElement.style.display = 'inline-block';
                 nextBtn.style.opacity = '0';
@@ -1193,7 +1193,7 @@ git push -u origin main
                 typeText();
             });
             
-            // Botão de alternar entre versões
+            
             violaoToggle.addEventListener('click', () => {
                 isViolaoVersion = !isViolaoVersion;
                 violaoToggle.textContent = isViolaoVersion ? "🎵 Ouvir versão original" : "🎸 Ouvir versão violão";
@@ -1201,9 +1201,9 @@ git push -u origin main
             });
         }
 
-        // Iniciar experiência
+      
         function startExperience() {
-            // Transição suave entre telas
+          
             welcomeScreen.style.opacity = '0';
             setTimeout(() => {
                 welcomeScreen.style.display = 'none';
@@ -1211,7 +1211,7 @@ git push -u origin main
                 setTimeout(() => {
                     contentScreen.style.opacity = '1';
                     
-                    // Iniciar digitação após um breve delay
+                    
                     setTimeout(() => {
                         typeText();
                         backgroundMusic.play().catch(e => {
@@ -1222,26 +1222,26 @@ git push -u origin main
             }, 500);
         }
 
-        // Inicialização
+        
         function init() {
             createUniverse();
             initPageIndicators();
             setupControls();
             
-            // Configurar música
+            
             updateMusic();
             
-            // Event listeners
+            
             nextBtn.addEventListener('click', nextPage);
             specialBtn.addEventListener('click', startDialogues);
             startBtn.addEventListener('click', startExperience);
             
-            // Verificar orientação quando a janela é redimensionada ou girada
+            
             window.addEventListener('resize', checkOrientation);
             window.addEventListener('orientationchange', checkOrientation);
         }
 
-        // Permitir reprodução de música após interação do usuário
+        
         document.addEventListener('click', () => {
             if (backgroundMusic.paused && contentScreen.style.display === 'block') {
                 backgroundMusic.play();
@@ -1249,7 +1249,7 @@ git push -u origin main
             }
         });
 
-        // Iniciar o site
+      
         window.onload = init;
     </script>
 </body>
